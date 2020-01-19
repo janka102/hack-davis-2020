@@ -139,6 +139,6 @@ export class VideoPlayerComponent implements OnInit {
 
   async sendChat(text: string) {
     this.text = "";
-    await this.dataService.sendChat("test", "Jesse", text);
+    await this.dataService.sendChat("test", this.selectedUser.name, text);
   }
 }
