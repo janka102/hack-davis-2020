@@ -23,34 +23,54 @@ export class DataService {
   ) { }
 
   async sendStudentPicture(image: string) {
-    const result = <{[x:string]: number} | null>(await this.http.post(`${environment.serverUrl}/users/faceDetect`, {
+    const result = (await this.http.post(`${environment.serverUrl}/users/faceDetect`, {
       camera: image
-    }).toPromise());
+    }).toPromise()) as {[x: string]: number} | null;
     return result;
   }
 
   async getCourses() {
-    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/courses/`).toPromise());
+    const result = (await this.http.get(`${environment.serverUrl}/courses/`).toPromise()) as {[x: string]: any}[];
     return result;
   }
 
   async getCourse(id: string) {
-    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/courses/${id}`).toPromise());
+    const result = (await this.http.get(`${environment.serverUrl}/courses/${id}`).toPromise()) as {[x: string]: any}[];
     return result;
   }
 
   async getLectures() {
-    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/lectures/`).toPromise());
+    const result = (await this.http.get(`${environment.serverUrl}/lectures/`).toPromise()) as {[x: string]: any}[];
     return result;
   }
 
   async getLecture(id: string) {
-    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/lectures/${id}`).toPromise());
+    const result = (await this.http.get(`${environment.serverUrl}/lectures/${id}`).toPromise()) as {[x: string]: any}[];
+    return result;
+  }
+
+  async getReactions(user, lecture) {
+    const query = [];
+
+    if (user) {
+      query.push(`user=${user}`);
+    }
+
+    if (lecture) {
+      query.push(`lecture=${lecture}`);
+    }
+
+    const result = (await this.http.get(`${environment.serverUrl}/reaction/?${query.join('&')}`).toPromise()) as {[x: string]: any}[];
+    return result;
+  }
+
+  async getReaction(id: string) {
+    const result = (await this.http.get(`${environment.serverUrl}/reaction/${id}`).toPromise()) as {[x: string]: any}[];
     return result;
   }
 
   async getUsers() {
-    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/users/`).toPromise());
+    const result = (await this.http.get(`${environment.serverUrl}/users/`).toPromise()) as {[x: string]: any}[];
     return result;
   }
 

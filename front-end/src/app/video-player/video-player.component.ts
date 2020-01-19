@@ -75,10 +75,10 @@ export class VideoPlayerComponent implements OnInit {
       };
     }
 
-    this.lineChartData[0].data.push(<any>{ t: now, y: (result.anger * 100) | 0 });
-    this.lineChartData[1].data.push(<any>{ t: now, y: (result.sorrow * 100) | 0 });
-    this.lineChartData[2].data.push(<any>{ t: now, y: (result.joy * 100) | 0 });
-    this.lineChartData[3].data.push(<any>{ t: now, y: (result.surprise * 100) | 0 });
+    this.lineChartData[0].data.push({ t: now, y: (result.anger * 100) | 0 } as any);
+    this.lineChartData[1].data.push({ t: now, y: (result.sorrow * 100) | 0 } as any);
+    this.lineChartData[2].data.push({ t: now, y: (result.joy * 100) | 0 } as any);
+    this.lineChartData[3].data.push({ t: now, y: (result.surprise * 100) | 0 } as any);
 
     for (let chartData of this.lineChartData) {
       chartData.data.sort((a, b) => a.t - b.t);

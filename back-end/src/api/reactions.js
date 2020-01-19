@@ -1,10 +1,21 @@
+const mongoose = require("mongoose");
 const express = require("express");
-const Course = require("../../models/course");
+const Reaction = require("../../models/reaction");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  Course.find({})
+  const search = {};
+
+  if (req.query.user) {
+    search.user = mongoose.Types.ObjectId(req.query.user);
+  }
+
+  if (req.query.lecture) {
+    search.lecture = mongoose.Types.ObjectId(req.query.lecture);
+  }
+
+  Reaction.find(search)
     .then(users => {
       res.json(users);
     })
@@ -17,7 +28,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  Course.findById(req.params.id)
+  Reaction.findById(req.params.id)
     .then(user => {
       res.json(user);
     })

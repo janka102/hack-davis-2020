@@ -40,7 +40,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/public/attentions
+/public/reactions
 
 # System Files
 .DS_Store
