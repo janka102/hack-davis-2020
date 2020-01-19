@@ -15,8 +15,9 @@
   "dependencies": {
     "@google-cloud/vision": "^1.8.0",
     "body-parser": "^1.19.0",
+    "dotenv-defaults": "^1.0.3",
     "express": "^4.17.1",
-    "mongodb": "^3.5.1",
+    "mongoose": "^5.8.9",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
