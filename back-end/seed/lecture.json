@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "5e244178a76b43ad7d382223",
+    "course": { "_id": "5e243cd5b58f0e9a9810abda" },
+    "name": "Lecture 1.1 - Getting Started in the class",
+    "date": "Now",
+    "video": "/lecture-videos/undefined.mp4"
+  },
+  {
+    "_id": "5e244178a76b43ad7d382224",
+    "course": { "_id": "5e243cd5b58f0e9a9810abdb" },
+    "name": "How to Write Using MLA Format",
+    "date": "In 1 hour",
+    "video": "/lecture-videos/undefined.mp4"
+  },
+  {
+    "_id": "5e244178a76b43ad7d382225",
+    "course": { "_id": "5e243cd5b58f0e9a9810abdc" },
+    "name": "What is Motion?",
+    "date": "Tomorrow at 9am",
+    "video": "/lecture-videos/undefined.mp4"
+  }
+]

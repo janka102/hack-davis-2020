@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "5e243115d38bde6a3aa167a7",
+    "name": "Jesse",
+    "role": "student"
+  },
+  {
+    "_id": "5e243636fe08f27fdcfe0228",
+    "name": "Diane",
+    "role": "student"
+  },
+  {
+    "_id": "5e243636fe08f27fdcfe0229",
+    "name": "Nadya",
+    "role": "student"
+  },
+  {
+    "_id": "5e243636fe08f27fdcfe022a",
+    "name": "Thomas",
+    "role": "professor"
+  }
+]

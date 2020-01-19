@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "5e243cd5b58f0e9a9810abda",
+    "code": "CS 101",
+    "name": "Intro to Computer Science"
+  },
+  {
+    "_id": "5e243cd5b58f0e9a9810abdb",
+    "code": "ENGL 101",
+    "name": "Lower division writing"
+  },
+  {
+    "_id": "5e243cd5b58f0e9a9810abdc",
+    "code": "PHYS 130",
+    "name": "Motion physics"
+  }
+]

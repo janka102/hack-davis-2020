@@ -15,6 +15,7 @@ app.use(
     path.join(__dirname, "..", "..", "front-end", "dist", "front-end")
   )
 );
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use("/api", api);
 
