@@ -4,11 +4,21 @@ const vision = require("@google-cloud/vision");
 const router = express.Router();
 const visionClient = new vision.ImageAnnotatorClient();
 
+// Things to consider:
+// - What student is this?
+// - What lecture is this for?
+// - What time in the lecture was this picture taken?
 router.post("/faceDetect", (req, res) => {
+  let picture = req.body.camera;
+
+  if (picture.indexOf("data:") === 0) {
+    picture = picture.slice(picture.indexOf("base64,") + 1);
+  }
+
   visionClient
     .faceDetection({
       image: {
-        content: Buffer.from(req.body.camera, "base64")
+        content: Buffer.from(picture, "base64")
       }
     })
     .then(([response]) => {
