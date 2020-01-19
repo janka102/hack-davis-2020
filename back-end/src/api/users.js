@@ -64,7 +64,7 @@ router.post("/faceDetect", (req, res) => {
       if (faces.length < 1) {
         return Reaction.create({
           user: mongoose.Types.ObjectId(user),
-          lecture: mongoose.Types.ObjectId(mongoose),
+          lecture: mongoose.Types.ObjectId(lecture),
           time,
           source: "video",
           result: null
@@ -109,7 +109,7 @@ router.post("/faceDetect", (req, res) => {
 
       return Reaction.create({
         user: mongoose.Types.ObjectId(user),
-        lecture: mongoose.Types.ObjectId(mongoose),
+        lecture: mongoose.Types.ObjectId(lecture),
         time,
         source: "video",
         result: face
@@ -118,6 +118,7 @@ router.post("/faceDetect", (req, res) => {
       });
     })
     .catch(err => {
+      console.log(err);
       res.status(500);
       res.json({
         error: err

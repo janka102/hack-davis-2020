@@ -41,7 +41,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { user, lecture, time, source, result } = req.body;
+  let { user, lecture, time, result } = req.body;
 
   if (!user || !lecture || typeof time !== "number") {
     res.status(400);
@@ -53,7 +53,7 @@ router.post("/", (req, res) => {
 
   Reaction.create({
     user: mongoose.Types.ObjectId(user),
-    lecture: mongoose.Types.ObjectId(mongoose),
+    lecture: mongoose.Types.ObjectId(lecture),
     time,
     source: "button",
     result
