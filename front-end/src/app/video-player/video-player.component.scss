@@ -51,6 +51,8 @@
 }
 
 .video-professor {
+    box-shadow: none;
+    border: rgba(0, 0, 0, .125) solid 1px;
     display: flex;
     flex-direction: column;
     justify-content: center;
