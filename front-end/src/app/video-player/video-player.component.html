@@ -1,7 +1,7 @@
 <div class="page">
     <div class="container">
         <div class="titleBox">
-            <span class="title"> Lecture {{ lectureNumber }} - {{ lectureTitle }}</span>
+            <span class="title">{{ name }}</span>
         </div>
         <div class="content">
             <mat-card class="video">
@@ -9,7 +9,6 @@
                     [width] = "200"
                     (image) = "sendPicture($event)"
                 >
-
                 </app-webcam-capturer
                 >
             </mat-card>
