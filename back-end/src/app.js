@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
+const api = require("./api");
 
 const app = express();
 const { PORT } = process.env;
@@ -14,6 +15,8 @@ app.use(
     path.join(__dirname, "..", "..", "front-end", "dist", "front-end")
   )
 );
+
+app.use("/api", api);
 
 exports.run = () => {
   const server = app.listen(PORT, () => {
