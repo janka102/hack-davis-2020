@@ -20,6 +20,7 @@ import { ClassesPageComponent } from './classes-page/classes-page.component';
 import { LecturesComponent } from './components/lectures/lectures.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { ClassDetailsComponent } from './class-details/class-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ChartsModule } from 'ng2-charts';
     NavbarComponent,
     VideoPlayerComponent,
     ClassesPageComponent,
-    LecturesComponent
+    LecturesComponent,
+    ClassDetailsComponent
   ],
   imports: [
     BrowserModule,
