@@ -31,6 +31,10 @@
     display: grid;
     grid-template-columns: minmax(auto, 70%) minmax(auto, 30%);
     grid-gap: 30px;
+
+    &.professor {
+        grid-template-columns: minmax(auto, 100%);
+    }
 }
 
 .video {
@@ -40,6 +44,11 @@
 
 .lecture-video {
     max-width: 100%;
+}
+
+.lecture-top {
+    display: flex;
+    justify-content: space-between;
 }
 
 .chat {

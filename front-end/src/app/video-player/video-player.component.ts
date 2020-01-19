@@ -17,6 +17,8 @@ export class VideoPlayerComponent implements OnInit {
   text: string;
 
   chats: Chat[];
+  users: any[];
+  selectedUser: any = null;
 
   public lineChartData: ChartDataSets[] = [
     { data: [], label: "Anger", pointRadius: 0 },
@@ -68,14 +70,22 @@ export class VideoPlayerComponent implements OnInit {
       });
     });
 
-    this.dataService.getLecture(this.route.snapshot.params.lectureId).then(lecture => {
-      this.name = lecture.name;
-      this.lectureVideo = lecture.video;
+    this.dataService
+      .getLecture(this.route.snapshot.params.lectureId)
+      .then(lecture => {
+        this.name = lecture.name;
+        this.lectureVideo = lecture.video;
+      });
+
+    this.dataService.getUsers().then(users => {
+      this.users = users;
+      this.selectedUser = users[0];
     });
   }
 
-  async sendPicture(image: string, time: number) {
+  async sendPicture(image: string) {
     const now = new Date();
+    let time = 0;
     let reaction = await this.dataService.sendStudentPicture({
       user: "5e243115d38bde6a3aa167a7",
       lecture: "5e244178a76b43ad7d382225",
