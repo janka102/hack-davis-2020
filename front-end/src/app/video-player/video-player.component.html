@@ -16,11 +16,11 @@
                         chartType="line"
                     >
                     </canvas>
+                    <video class="lecture-video" controls [src]="lectureVideo"></video>
                     <app-webcam-capturer
                         [width] = "200"
-                        (image) = "sendPicture($event)"
+                        (image) = "sendPicture($event, 0)"
                     >
-    
                     </app-webcam-capturer>
                     <p>Tilt: {{ facePosition.tilt }}&deg;, Pan: {{ facePosition.pan }}&deg;, Roll: {{ facePosition.roll }}&deg;</p>
                 </mat-card>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </mat-card>
-            </div>      
+            </div>
         </div>
     </div>
 </div>

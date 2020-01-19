@@ -1,18 +1,14 @@
 const express = require("express");
 const fs = require("fs");
 const vision = require("@google-cloud/vision");
+const mongoose = require("mongoose");
 const path = require("path");
+const Reaction = require("../../models/reaction");
 const User = require("../../models/user");
 
 const router = express.Router();
 const visionClient = new vision.ImageAnnotatorClient();
-const reactionFolder = path.join(
-  __dirname,
-  "..",
-  "..",
-  "public",
-  "reactions"
-);
+const reactionFolder = path.join(__dirname, "..", "..", "public", "reactions");
 
 router.get("/", (req, res) => {
   User.find({})
@@ -45,7 +41,15 @@ router.get("/:id", (req, res) => {
 // - What lecture is this for?
 // - What time in the lecture was this picture taken?
 router.post("/faceDetect", (req, res) => {
-  let picture = req.body.camera;
+  let { camera: picture, user, lecture, time } = req.body;
+
+  if (!user || !lecture || typeof time !== "number") {
+    res.status(400);
+    return res.json({
+      error:
+        "Must provide `user` ID, `lecture` ID, and `time` reaction happened"
+    });
+  }
 
   if (picture.indexOf("data:") === 0) {
     picture = picture.slice(picture.indexOf("base64,") + "base64,".length);
@@ -58,7 +62,15 @@ router.post("/faceDetect", (req, res) => {
     .then(([response]) => {
       const faces = response.faceAnnotations;
       if (faces.length < 1) {
-        return res.json(null);
+        return Reaction.create({
+          user: mongoose.Types.ObjectId(user),
+          lecture: mongoose.Types.ObjectId(lecture),
+          time,
+          source: "video",
+          result: null
+        }).then(reaction => {
+          res.json(reaction);
+        });
       }
 
       const {
@@ -95,11 +107,22 @@ router.post("/faceDetect", (req, res) => {
       //   err => {}
       // );
 
-      res.json(face);
+      return Reaction.create({
+        user: mongoose.Types.ObjectId(user),
+        lecture: mongoose.Types.ObjectId(lecture),
+        time,
+        source: "video",
+        result: face
+      }).then(reaction => {
+        res.json(reaction);
+      });
     })
     .catch(err => {
+      console.log(err);
       res.status(500);
-      res.json(err);
+      res.json({
+        error: err
+      });
     });
 });
 

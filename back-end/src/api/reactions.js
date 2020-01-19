@@ -40,4 +40,33 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  let { user, lecture, time, result } = req.body;
+
+  if (!user || !lecture || typeof time !== "number") {
+    res.status(400);
+    return res.json({
+      error:
+        "Must provide `user` ID, `lecture` ID, and `time` reaction happened"
+    });
+  }
+
+  Reaction.create({
+    user: mongoose.Types.ObjectId(user),
+    lecture: mongoose.Types.ObjectId(lecture),
+    time,
+    source: "button",
+    result
+  })
+    .then(reaction => {
+      res.json(reaction);
+    })
+    .catch(err => {
+      res.status(500);
+      res.json({
+        error: err
+      });
+    });
+});
+
 module.exports = router;
