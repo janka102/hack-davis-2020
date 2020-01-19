@@ -1,0 +1,55 @@
+.page {
+    display: grid;
+    height: 100%;
+    padding: 0 10vw;
+}
+
+.titleBox{
+    padding-bottom: 20px;
+    .title {
+        font-size: 26px;
+        font-weight: 500;
+        color: grey;
+    }
+}
+
+.container {
+    height: 100%;
+    padding: 50px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    grid-gap: 20px;
+    height: 50%;
+    mat-card{
+        mat-card-title, mat-card-subtitle {
+            color: #fff
+        }
+    }
+} 
+
+.contentLecture {
+    display: grid;
+    grid-row-gap: 20px;
+}
+
+.lectureCard {
+    display: grid;
+    grid-template-columns: 100px auto auto;
+    .course, .date{
+        color: grey;
+        font-size: large;
+        font-weight: bold;
+    }
+    .name{
+        color: grey;
+        font-size: large;
+    }
+    .date{
+        justify-self: end;
+    }
+}
+
+

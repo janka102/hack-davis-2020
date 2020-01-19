@@ -6,12 +6,12 @@ const User = require("../../models/user");
 
 const router = express.Router();
 const visionClient = new vision.ImageAnnotatorClient();
-const attentionFolder = path.join(
+const reactionFolder = path.join(
   __dirname,
   "..",
   "..",
   "public",
-  "attentions"
+  "reactions"
 );
 
 router.get("/", (req, res) => {
@@ -85,12 +85,12 @@ router.post("/faceDetect", (req, res) => {
 
       // const filename = `${Date.now()}-${(10 + Math.random() * 90) | 0}`;
       // fs.writeFile(
-      //   path.join(attentionFolder, filename + ".png"),
+      //   path.join(reactionFolder, filename + ".png"),
       //   content,
       //   err => {}
       // );
       // fs.writeFile(
-      //   path.join(attentionFolder, filename + ".json"),
+      //   path.join(reactionFolder, filename + ".json"),
       //   JSON.stringify(face, null, 2),
       //   err => {}
       // );

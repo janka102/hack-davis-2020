@@ -9,6 +9,7 @@ import {
 } from '@angular/material';
 
 const modules = [
+  MatButtonModule,
   MatCardModule,
   MatIconModule,
   MatToolbarModule,

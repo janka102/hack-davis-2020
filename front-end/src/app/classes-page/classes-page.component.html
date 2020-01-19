@@ -1,0 +1,41 @@
+<div class="page">
+    <div class="container">
+        <div class="titleBox">
+            <span class="title"> My Classes </span>
+        </div>
+        <div class="content">
+            <mat-card *ngFor="let class of classes" [ngStyle]="{'background': class.color}">
+                <mat-card-title>{{ class.code }}</mat-card-title>
+                <mat-card-subtitle>{{ class.name }}</mat-card-subtitle>
+            </mat-card>
+            <mat-card [ngStyle]="{'background': '#00000025'}">
+                <mat-card-title>
+                    <mat-icon>add</mat-icon>
+                </mat-card-title>
+                <mat-card-subtitle>Add Another class</mat-card-subtitle>
+            </mat-card>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="titleBox">
+            <span class="title"> Upcoming Lectures </span>
+        </div>
+        <div class="contentLecture">
+            <mat-card class="lectureCard">
+                <mat-card-content class="course">
+                    <span>CS 101</span>
+                </mat-card-content>
+                <mat-card-content class="name">
+                    <span>Lecture 1.1 - Getting Started in the Class</span>
+                </mat-card-content>
+                <mat-card-content class="date">
+                    <button mat-raised-button color="accent" (click)="goToLecture()">Join Lecture </button>
+                </mat-card-content>          
+            </mat-card>
+            <app-lectures *ngFor="let lecture of lectures"
+                [lecture] = "lecture"
+            ></app-lectures>
+        </div>
+    </div> 
+</div>
