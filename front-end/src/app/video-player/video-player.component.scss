@@ -1,6 +1,8 @@
 .page {
-    display: grid;
-    height: 100%;
+    flex: 1;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 .titleBox{
@@ -13,16 +15,21 @@
 }
 
 .container {
-    width: 90%;
-    height: 100%;
-    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cards {
+    flex: 1;
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: minmax(auto, 70%) minmax(auto, 30%);
     grid-gap: 30px;
     height: 80%;
 }
-
-

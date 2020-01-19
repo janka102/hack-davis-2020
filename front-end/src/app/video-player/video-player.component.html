@@ -4,34 +4,36 @@
             <span class="title"> Lecture {{ lectureNumber }} - {{ lectureTitle }}</span>
         </div>
         <div class="content">
-            <mat-card class="video">
-                <canvas
-                    baseChart
-                    width="200"
-                    height="50"
-                    [datasets]="lineChartData"
-                    [options]="lineChartOptions"
-                    [legend]="true"
-                    chartType="line"
-                >
-                </canvas>
-                <app-webcam-capturer
-                    [width] = "200"
-                    (image) = "sendPicture($event)"
-                >
-
-                </app-webcam-capturer>
-                <p>Tilt: {{ facePosition.tilt }}&deg;, Pan: {{ facePosition.pan }}&deg;, Roll: {{ facePosition.roll }}&deg;</p>
-            </mat-card>
-            <mat-card class="chat">
-                <div *ngFor="let chat of chats">
-                    <b>{{ chat.user }}:</b> {{ chat.text }}
-                </div>
-                <mat-form-field appearance="outline">
-                    <textarea matInput [(ngModel)]="text" placeholder="Hello..."></textarea>
-                </mat-form-field>
-                <button mat-button color="primary" (click)="sendChat(text)">Send</button>
-            </mat-card>
+            <div class="cards">
+                <mat-card class="video">
+                    <!-- <canvas
+                        baseChart
+                        width="200"
+                        height="50"
+                        [datasets]="lineChartData"
+                        [options]="lineChartOptions"
+                        [legend]="true"
+                        chartType="line"
+                    >
+                    </canvas> -->
+                    <app-webcam-capturer
+                        [width] = "200"
+                        (image) = "sendPicture($event)"
+                    >
+    
+                    </app-webcam-capturer>
+                    <p>Tilt: {{ facePosition.tilt }}&deg;, Pan: {{ facePosition.pan }}&deg;, Roll: {{ facePosition.roll }}&deg;</p>
+                </mat-card>
+                <mat-card class="chat">
+                    <div *ngFor="let chat of chats">
+                        <b>{{ chat.user }}:</b> {{ chat.text }}
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <textarea matInput [(ngModel)]="text" placeholder="Hello..."></textarea>
+                    </mat-form-field>
+                    <button mat-button color="primary" (click)="sendChat(text)">Send</button>
+                </mat-card>
+            </div>      
         </div>
     </div>
 </div>
