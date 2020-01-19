@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const vision = require("@google-cloud/vision");
 const path = require("path");
+const User = require("../../models/user");
 
 const router = express.Router();
 const visionClient = new vision.ImageAnnotatorClient();
@@ -12,6 +13,32 @@ const attentionFolder = path.join(
   "public",
   "attentions"
 );
+
+router.get("/", (req, res) => {
+  User.find({})
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {
+      res.status(500);
+      res.json({
+        error: err
+      });
+    });
+});
+
+router.get("/:id", (req, res) => {
+  User.findById(req.params.id)
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      res.status(500);
+      res.json({
+        error: err
+      });
+    });
+});
 
 // Things to consider:
 // - What student is this?

@@ -23,9 +23,34 @@ export class DataService {
   ) { }
 
   async sendStudentPicture(image: string) {
-    const result = <{[x:string]: number} | null>(await this.http.post(`${environment.serverUrl}/student/faceDetect`, {
+    const result = <{[x:string]: number} | null>(await this.http.post(`${environment.serverUrl}/users/faceDetect`, {
       camera: image
     }).toPromise());
+    return result;
+  }
+
+  async getCourses() {
+    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/courses/`).toPromise());
+    return result;
+  }
+
+  async getCourse(id: string) {
+    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/courses/${id}`).toPromise());
+    return result;
+  }
+
+  async getLectures() {
+    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/lectures/`).toPromise());
+    return result;
+  }
+
+  async getLecture(id: string) {
+    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/lectures/${id}`).toPromise());
+    return result;
+  }
+
+  async getUsers() {
+    const result = <{[x:string]: any}[]>(await this.http.get(`${environment.serverUrl}/users/`).toPromise());
     return result;
   }
 
