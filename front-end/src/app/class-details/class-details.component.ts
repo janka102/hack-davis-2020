@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavbarService } from '../navbar.service';
 
 @Component({
   selector: 'app-class-details',
@@ -38,11 +39,14 @@ export class ClassDetailsComponent implements OnInit {
 
   constructor(
     private route : ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private navbarService: NavbarService
     ) { }
 
   ngOnInit() {
     this.classId = this.route.snapshot.paramMap.get('classId');
+    const myClass = this.classes[this.classId];
+    this.navbarService.setClassName(myClass.course + ' - ' + myClass.name, this.classId);
   }
   goToLecture(){
     this.router.navigate(['class', 'cs101', 'lecture', '5e244178a76b43ad7d382223']);

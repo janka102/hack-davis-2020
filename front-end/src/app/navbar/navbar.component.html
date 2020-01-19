@@ -9,14 +9,14 @@
       </div>
     </mat-toolbar-row>
 
-    <mat-toolbar-row *ngIf="showClass">
+    <mat-toolbar-row *ngIf="data.showClass">
         <div class="breadcrumb"></div>
-        <span> {{ className ? className + ' - ' + classDescription : ' ' }} </span>
+        <span [routerLink]="['class', data.currentClassId]"> {{ data.currentClass }} </span>
     </mat-toolbar-row>
 
-    <mat-toolbar-row *ngIf="showLecture">
+    <mat-toolbar-row *ngIf="data.showLecture">
       <div class="breadcrumb"></div>
-      <span>Lecture 1.1</span>
+      <span>{{ data.currentLecture }}</span>
   </mat-toolbar-row>
     
   </mat-toolbar>

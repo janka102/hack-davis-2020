@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartPoint } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { DataService, Chat, Timestamp } from "../services/data.service";
+import { NavbarService } from '../navbar.service';
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -58,7 +59,8 @@ export class VideoPlayerComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private navbarService: NavbarService
   ) {}
 
   ngOnInit() {
@@ -74,6 +76,7 @@ export class VideoPlayerComponent implements OnInit {
       .getLecture(this.route.snapshot.params.lectureId)
       .then(lecture => {
         this.name = lecture.name;
+        this.navbarService.setLectureName(this.name);
         this.lectureVideo = lecture.video;
       });
 

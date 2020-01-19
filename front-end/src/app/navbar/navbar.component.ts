@@ -1,36 +1,36 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { NavbarService, Breadcrumbs } from '../navbar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Input() appName;
-  @Input() className = 'CS 101';
-  @Input() classDescription = 'Intro to Computer Science';
-  showClass = false;
-  showLecture = false;
+  data: Breadcrumbs = {
+    currentClass: '',
+    currentClassId: '',
+    currentLecture: '',
+    showClass: false,
+    showLecture: false
+  };
+  sub: Subscription;
 
-  constructor(private router: Router) { }
+  constructor(private navbarService: NavbarService) { }
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        if (event.url.startsWith('/class')) {
-          this.showClass = true;
-        } else {
-          this.showClass = false;
-        }
+    this.navbarService.start();
+    this.sub = this.navbarService.getBreadcrumbs$().subscribe((breadcrumbs => {
+      this.data = breadcrumbs;
+    }));
+  }
 
-        if (event.url.includes('/lecture')) {
-          this.showLecture = true;
-        } else {
-          this.showLecture = false;
-        }
-      }
-    });
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
 }
