@@ -56,21 +56,18 @@ router.post("/faceDetect", (req, res) => {
         surprise: likelihoodToNumber(surpriseLikelihood)
       };
 
-      const filename = `${Date.now()}-${(10 + Math.random() * 90) | 0}`;
-      fs.writeFile(
-        path.join(attentionFolder, filename + ".png"),
-        content,
-        err => {
-          console.log(err);
-        }
-      );
-      fs.writeFile(
-        path.join(attentionFolder, filename + ".json"),
-        JSON.stringify(face, null, 2),
-        err => {
-          console.log(err);
-        }
-      );
+      // const filename = `${Date.now()}-${(10 + Math.random() * 90) | 0}`;
+      // fs.writeFile(
+      //   path.join(attentionFolder, filename + ".png"),
+      //   content,
+      //   err => {}
+      // );
+      // fs.writeFile(
+      //   path.join(attentionFolder, filename + ".json"),
+      //   JSON.stringify(face, null, 2),
+      //   err => {}
+      // );
+
       res.json(face);
     })
     .catch(err => {

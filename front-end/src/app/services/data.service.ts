@@ -23,9 +23,9 @@ export class DataService {
   ) { }
 
   async sendStudentPicture(image: string) {
-    const result = await this.http.post(`${environment.serverUrl}/student/faceDetect`, {
+    const result = <{[x:string]: number} | null>(await this.http.post(`${environment.serverUrl}/student/faceDetect`, {
       camera: image
-    }).toPromise();
+    }).toPromise());
     return result;
   }
 
