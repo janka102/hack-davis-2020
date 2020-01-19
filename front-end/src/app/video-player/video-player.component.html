@@ -5,7 +5,13 @@
         </div>
         <div class="content">
             <mat-card class="video">
-    
+                <app-webcam-capturer
+                    [width] = "200"
+                    (image) = "sendPicture($event)"
+                >
+
+                </app-webcam-capturer
+                >
             </mat-card>
             <mat-card class="chat">
     
