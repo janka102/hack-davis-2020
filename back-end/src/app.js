@@ -3,11 +3,8 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
-const DEFAULT_PORT = 2020;
-const { PORT } = process.env;
-const port = PORT || DEFAULT_PORT;
-
 const app = express();
+const { PORT } = process.env;
 
 app.use(bodyParser.json());
 app.use(morgan("dev"));
@@ -19,7 +16,7 @@ app.use(
 );
 
 exports.run = () => {
-  const server = app.listen(port, () => {
+  const server = app.listen(PORT, () => {
     let addressInfo = server.address();
     let address;
 
