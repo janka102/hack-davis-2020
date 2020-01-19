@@ -28,7 +28,16 @@ export class VideoPlayerComponent implements OnInit {
           time: {
               unit: 'minute'
           }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 100
+        }
       }]
+    },
+    animation: {
+      duration: 0
     }
   };
 
@@ -54,23 +63,34 @@ export class VideoPlayerComponent implements OnInit {
 
   async sendPicture(image: string) {
     const now = new Date();
-    const result = await this.dataService.sendStudentPicture(image);
+    let result = await this.dataService.sendStudentPicture(image);
     console.log(result);
-    if (result) {
-      this.lineChartData[0].data.push(<any>{ t: now, y: (result.anger * 100) | 0 });
-      this.lineChartData[1].data.push(<any>{ t: now, y: (result.sorrow * 100) | 0 });
-      this.lineChartData[2].data.push(<any>{ t: now, y: (result.joy * 100) | 0 });
-      this.lineChartData[3].data.push(<any>{ t: now, y: (result.surprise * 100) | 0 });
-
-      this.lineChartData[0].data.sort((a, b) => a.t - b.t);
-      this.lineChartData[1].data.sort((a, b) => a.t - b.t);
-      this.lineChartData[2].data.sort((a, b) => a.t - b.t);
-      this.lineChartData[3].data.sort((a, b) => a.t - b.t);
-
-      this.facePosition.tilt = result.tilt | 0;
-      this.facePosition.pan = result.pan | 0;
-      this.facePosition.roll = result.roll | 0;
+    if (!result) {
+      // No face detected
+      result = {
+        anger: 0,
+        sorrow: 0,
+        joy: 0,
+        surprise: 0
+      };
     }
+
+    this.lineChartData[0].data.push(<any>{ t: now, y: (result.anger * 100) | 0 });
+    this.lineChartData[1].data.push(<any>{ t: now, y: (result.sorrow * 100) | 0 });
+    this.lineChartData[2].data.push(<any>{ t: now, y: (result.joy * 100) | 0 });
+    this.lineChartData[3].data.push(<any>{ t: now, y: (result.surprise * 100) | 0 });
+
+    for (let chartData of this.lineChartData) {
+      chartData.data.sort((a, b) => a.t - b.t);
+
+      if (chartData.data.length > 30) {
+        chartData.data = chartData.data.slice(-30);
+      }
+    }
+
+    this.facePosition.tilt = result.tilt | 0;
+    this.facePosition.pan = result.pan | 0;
+    this.facePosition.roll = result.roll | 0;
   }
 
   async sendChat(text: string) {
