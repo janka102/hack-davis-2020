@@ -1,0 +1,28 @@
+.page {
+    display: grid;
+    height: 100%;
+}
+
+.titleBox{
+    padding-bottom: 20px;
+    .title {
+        font-size: 26px;
+        font-weight: 500;
+        color: grey;
+    }
+}
+
+.container {
+    width: 90%;
+    height: 100%;
+    padding: 50px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-gap: 30px;
+    height: 80%;
+}
+
+
