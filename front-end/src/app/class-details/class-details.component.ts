@@ -11,6 +11,7 @@ export class ClassDetailsComponent implements OnInit {
   classes = {
     cs101: {
       course: "CS 101",
+      name: "Intro to Computer Science",
       upLectures: [
         {
           course: "CS 101",
@@ -32,7 +33,40 @@ export class ClassDetailsComponent implements OnInit {
       ]
     },
     phys130: {
-      
+      course: "Phys 130",
+      name: "Motion Physics",
+      upLectures: [
+        {
+          course: "Phys 130",
+          name: "What is motion",
+          date: "Tomorrow at 9am"
+        },
+      ],
+      prevLectures: [
+        {
+          course: "Phys 130",
+          name: "Syllabus review",
+          date: "Two Days Ago"
+        }
+      ]
+    },
+    eng1: {
+      course: "English 1",
+      name: "Lower Division Writing",
+      upLectures: [
+        {
+          course: "English 1",
+          name: "How to write using MLA format",
+          date: "In 1 hour"
+        },
+      ],
+      prevLectures: [
+        {
+          course: "English 1",
+          name: "Syllabus Review",
+          date: "Two Days Ago"
+        }
+      ]
     }
   }
 
