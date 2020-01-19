@@ -36,14 +36,14 @@ export class VideoPlayerComponent implements OnInit {
   ];
   public lineChartOptions: ChartOptions = {
     scales: {
-      // xAxes: [
-      //   {
-      //     type: "time",
-      //     time: {
-      //       unit: "second"
-      //     }
-      //   }
-      // ],
+      xAxes: [
+        {
+          type: "time",
+          time: {
+            unit: "second"
+          }
+        }
+      ],
       yAxes: [
         {
           ticks: {
@@ -102,21 +102,31 @@ export class VideoPlayerComponent implements OnInit {
 
     this.dataService.getReactions(lecture, time).then(reactions => {
       this.lineChartData[0].data = reactions.map(r => ({
-        x: r.time,
+        x: new Date(Date.now() + (r.time * 1000)),
         y: Math.floor(r.anger * 100)
       }));
       this.lineChartData[1].data = reactions.map(r => ({
-        x: r.time,
+        x: new Date(Date.now() + (r.time * 1000)),
         y: Math.floor(r.sorrow * 100)
       }));
       this.lineChartData[2].data = reactions.map(r => ({
-        x: r.time,
+        x: new Date(Date.now() + (r.time * 1000)),
         y: Math.floor(r.joy * 100)
       }));
       this.lineChartData[3].data = reactions.map(r => ({
-        x: r.time,
+        x: new Date(Date.now() + (r.time * 1000)),
         y: Math.floor(r.surprise * 100)
       }));
+
+      // this.lineChartData[0].data = reactions.map(r => Math.floor(r.anger * 100));
+      // this.lineChartData[1].data = reactions.map(r => Math.floor(r.sorrow * 100));
+      // this.lineChartData[2].data = reactions.map(r => Math.floor(r.joy * 100));
+      // this.lineChartData[3].data = reactions.map(r => Math.floor(r.surprise * 100));
+
+      // this.lineChartData[0].data = [0, 10, 20, 30, 40];
+      // this.lineChartData[1].data = [10, 20, 30, 40, 50];
+      // this.lineChartData[2].data = [0, 10, 20, 30, 40];
+      // this.lineChartData[3].data = reactions.map(r => Math.floor(r.surprise * 100));
     });
   }
 
