@@ -17,31 +17,32 @@
     </div>
     <div class="content" *ngIf="selectedUser.role === 'professor'">
       <div class="cards professor">
-        <mat-card class="video">
+        <mat-card class="video-professor">
+          <video class="lecture-video" controls [src]="lectureVideo"></video>
           <canvas
             baseChart
             width="200"
-            height="50"
+            height="37"
             [datasets]="lineChartData"
             [options]="lineChartOptions"
             [legend]="true"
             chartType="line"
+            class="graph"
           >
           </canvas>
-          <video class="lecture-video" controls [src]="lectureVideo"></video>
         </mat-card>
       </div>
     </div>
     <div class="content" *ngIf="selectedUser.role === 'student'">
       <div class="cards">
-        <mat-card class="video">
+        <mat-card class="video-student">
           <video class="lecture-video" controls [src]="lectureVideo"></video>
           <app-webcam-capturer [width]="200" (image)="sendPicture($event)">
           </app-webcam-capturer>
-          <p>
+          <!-- <p>
             Tilt: {{ facePosition.tilt }}&deg;, Pan:
             {{ facePosition.pan }}&deg;, Roll: {{ facePosition.roll }}&deg;
-          </p>
+          </p> -->
         </mat-card>
         <mat-card class="chat">
           <div class="chat-content">

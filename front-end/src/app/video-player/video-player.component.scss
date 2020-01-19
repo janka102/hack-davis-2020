@@ -37,13 +37,33 @@
     }
 }
 
-.video {
+.video-student {
     box-shadow: none;
     border: rgba(0, 0, 0, .125) solid 1px;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .lecture-video {
+        max-width: 100%;
+    }
 }
 
-.lecture-video {
-    max-width: 100%;
+.video-professor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .graph {
+        height: 7.5vh;
+    }
+
+    .lecture-video {
+        height: 40vh;
+        width: 50%;
+    }
 }
 
 .lecture-top {
@@ -158,4 +178,10 @@
         background-color: rgba(0, 0, 0, .125);
         border: 2px solid transparent;
     }
+}
+
+app-webcam-capturer {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
