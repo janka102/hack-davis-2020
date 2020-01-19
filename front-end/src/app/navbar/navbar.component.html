@@ -13,5 +13,10 @@
         <div class="breadcrumb"></div>
         <span> {{ className ? className + ' - ' + classDescription : ' ' }} </span>
     </mat-toolbar-row>
+
+    <mat-toolbar-row *ngIf="showLecture">
+      <div class="breadcrumb"></div>
+      <span>Lecture 1.1</span>
+  </mat-toolbar-row>
     
   </mat-toolbar>

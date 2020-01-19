@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   @Input() className = 'CS 101';
   @Input() classDescription = 'Intro to Computer Science';
   showClass = false;
+  showLecture = false;
 
   constructor(private router: Router) { }
 
@@ -21,6 +22,12 @@ export class NavbarComponent implements OnInit {
           this.showClass = true;
         } else {
           this.showClass = false;
+        }
+
+        if (event.url.includes('/lecture')) {
+          this.showLecture = true;
+        } else {
+          this.showLecture = false;
         }
       }
     });
