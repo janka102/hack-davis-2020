@@ -6,7 +6,7 @@
         <div class="content">
             <div class="cards">
                 <mat-card class="video">
-                    <!-- <canvas
+                    <canvas
                         baseChart
                         width="200"
                         height="50"
@@ -15,7 +15,7 @@
                         [legend]="true"
                         chartType="line"
                     >
-                    </canvas> -->
+                    </canvas>
                     <app-webcam-capturer
                         [width] = "200"
                         (image) = "sendPicture($event)"
@@ -25,13 +25,22 @@
                     <p>Tilt: {{ facePosition.tilt }}&deg;, Pan: {{ facePosition.pan }}&deg;, Roll: {{ facePosition.roll }}&deg;</p>
                 </mat-card>
                 <mat-card class="chat">
-                    <div *ngFor="let chat of chats">
-                        <b>{{ chat.user }}:</b> {{ chat.text }}
+                    <div class="chat-content">
+                        <div class="chat-history" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                            <div *ngFor="let chat of chats">
+                                <span class="chat-user">{{ chat.user }}:</span>&nbsp;<span class="chat-text">{{ chat.text }}</span>
+                            </div>
+                        </div>
+                        <div class="chat-divider"></div>
+                        <div class="chat-box">
+                            <mat-form-field appearance="outline">
+                                <textarea matInput [(ngModel)]="text" placeholder="Hello..." (keydown.enter)="sendChat(text);false"></textarea>
+                            </mat-form-field>
+                            <button mat-flat-button color="accent" (click)="sendChat(text)">
+                                <mat-icon>send</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                    <mat-form-field appearance="outline">
-                        <textarea matInput [(ngModel)]="text" placeholder="Hello..."></textarea>
-                    </mat-form-field>
-                    <button mat-button color="primary" (click)="sendChat(text)">Send</button>
                 </mat-card>
             </div>      
         </div>

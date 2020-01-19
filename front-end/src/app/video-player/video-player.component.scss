@@ -31,5 +31,118 @@
     display: grid;
     grid-template-columns: minmax(auto, 70%) minmax(auto, 30%);
     grid-gap: 30px;
-    height: 80%;
+}
+
+.video {
+    box-shadow: none;
+    border: rgba(0, 0, 0, .125) solid 1px;
+}
+
+.chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    border: rgba(0, 0, 0, .125) solid 1px;
+    padding: 16px 0 0;
+
+    .chat-content {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 0;
+    }
+
+    .chat-history {
+        overflow-y: scroll;
+        height: 95%;
+        padding: 0 16px;
+        margin-right: 8px;
+
+        .chat-user {
+            font-weight: bold;
+            color: rgba(0, 0, 0, .75);
+        }
+
+        .chat-text {
+            color: rgba(0, 0, 0, .625);
+        }
+    }
+
+    .chat-divider {
+        border-top: rgba(0, 0, 0, .125) solid 1px;
+        margin-top: 16px;
+    }
+
+    .chat-box {
+        flex: 1;
+        display: flex;
+
+        textarea {
+            resize: none;
+        }
+
+        mat-form-field {
+            flex: 1;
+
+            ::ng-deep .mat-form-field-wrapper {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+
+            ::ng-deep .mat-form-field-outline {
+                color: transparent;
+
+                :hover {
+                    color: transparent;
+                }
+            }
+        }
+
+        button {
+            border-radius: 0 0 4px 0;
+        }
+    }
+
+    .chat-history::-webkit-scrollbar-track
+    {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, .0625);
+    }
+
+    .chat-history::-webkit-scrollbar
+    {
+        border-radius: 10px;
+        width: 8px;
+        background-color: rgba(0, 0, 0, .0625);
+    }
+
+    .chat-history::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, .125);
+        border: 2px solid transparent;
+    }
+
+    textarea::-webkit-scrollbar-track
+    {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, .0625);
+    }
+
+    textarea::-webkit-scrollbar
+    {
+        border-radius: 10px;
+        width: 8px;
+        background-color: rgba(0, 0, 0, .0625);
+    }
+
+    textarea::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, .125);
+        border: 2px solid transparent;
+    }
 }
