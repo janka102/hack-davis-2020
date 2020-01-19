@@ -12,7 +12,7 @@ router.post("/faceDetect", (req, res) => {
   let picture = req.body.camera;
 
   if (picture.indexOf("data:") === 0) {
-    picture = picture.slice(picture.indexOf("base64,") + 1);
+    picture = picture.slice(picture.indexOf("base64,") + "base64,".length);
   }
 
   visionClient

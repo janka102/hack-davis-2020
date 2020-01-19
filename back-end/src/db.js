@@ -16,11 +16,12 @@ module.exports.connect = () => {
         return reject(err);
       }
 
+      connected = true;
+      module.exports.client = client;
+
       process.on("exit", () => {
         client.close();
       });
-
-      module.exports.client = client;
 
       resolve(client);
     });
