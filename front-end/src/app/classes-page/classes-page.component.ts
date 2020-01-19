@@ -10,6 +10,7 @@ export class ClassesPageComponent implements OnInit {
   @Input() classes = [
     {
       code: "CS 101", 
+      id: 'cs101',
       name: "Intro to Computer Science",
       color: '#E79295'
     },
@@ -24,6 +25,7 @@ export class ClassesPageComponent implements OnInit {
       color: "#B693C2"
     }
 ]
+
 @Input() lectures = [
   {
     course: "English 1", 
@@ -43,6 +45,10 @@ export class ClassesPageComponent implements OnInit {
 
   goToLecture(){
     this.router.navigate(['class', 'cs101', 'lecture', '5e244178a76b43ad7d382223']);
+  }
+
+  goToClass(classObject){
+    this.router.navigate(['class', 'cs101'],{});
   }
 
 }
