@@ -16,7 +16,7 @@
                         chartType="line"
                     >
                     </canvas>
-                    <video [src]="lectureVideo"></video>
+                    <video class="lecture-video" controls [src]="lectureVideo"></video>
                     <app-webcam-capturer
                         [width] = "200"
                         (image) = "sendPicture($event, 0)"

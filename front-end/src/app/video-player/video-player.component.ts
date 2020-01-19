@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class VideoPlayerComponent implements OnInit {
   @Input() course = "CS 101";
   @Input() courseInfo = "Intro to Computer Science";
-  @Input() name = "Lecture 1.1 - Getting Started in the Class";
+  @Input() name;
   @Input() lectureVideo;
   text: string;
 
@@ -69,6 +69,7 @@ export class VideoPlayerComponent implements OnInit {
     });
 
     this.dataService.getLecture(this.route.snapshot.params.lectureId).then(lecture => {
+      this.name = lecture.name;
       this.lectureVideo = lecture.video;
     });
   }
