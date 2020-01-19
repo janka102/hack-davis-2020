@@ -72,9 +72,14 @@ router.get("/", (req, res) => {
             anger: res.anger + (r ? r.anger : 0),
             sorrow: res.sorrow + (r ? r.sorrow : 0),
             joy: res.joy + (r ? r.joy : 0),
-            surprise: res.surprise + (r ? r.surprise : 0)
+            surprise: res.surprise + (r ? r.surprise : 0),
+            tilt:
+              Math.abs(res.tilt) < Math.abs(r ? r.tilt : 0) ? r.tilt : res.tilt,
+            pan: Math.abs(res.pan) < Math.abs(r ? r.pan : 0) ? r.pan : res.pan,
+            roll:
+              Math.abs(res.roll) < Math.abs(r ? r.roll : 0) ? r.roll : res.roll
           }),
-          { anger: 0, sorrow: 0, joy: 0, surprise: 0 }
+          { anger: 0, sorrow: 0, joy: 0, surprise: 0, tilt: 0, pan: 0, roll: 0 }
         );
         average[time].anger = average[time].anger / result.length;
         average[time].sorrow = average[time].sorrow / result.length;

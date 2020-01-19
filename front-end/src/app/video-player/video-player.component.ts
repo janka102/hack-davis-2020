@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartPoint } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { DataService, Chat, Timestamp } from "../services/data.service";
-import { NavbarService } from '../navbar.service';
+import { NavbarService } from "../navbar.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { interval, Subscription } from "rxjs";
 
@@ -32,7 +32,8 @@ export class VideoPlayerComponent implements OnInit {
     { data: [], label: "Anger", pointRadius: 0 },
     { data: [], label: "Sorrow", pointRadius: 0 },
     { data: [], label: "Joy", pointRadius: 0 },
-    { data: [], label: "Surprise", pointRadius: 0 }
+    { data: [], label: "Surprise", pointRadius: 0 },
+    { data: [], label: "Looking Away", type: "bar", maxBarThickness: 3 }
   ];
   public lineChartOptions: ChartOptions = {
     scales: {
@@ -77,7 +78,10 @@ export class VideoPlayerComponent implements OnInit {
       .getLecture(this.route.snapshot.params.lectureId)
       .then(lecture => {
         this.name = lecture.name;
-        this.navbarService.setClassName('CS 101 - Intro to Computer Science', 'cs101');
+        this.navbarService.setClassName(
+          "CS 101 - Intro to Computer Science",
+          "cs101"
+        );
         this.navbarService.setLectureName(this.name);
         this.lectureVideoSrc = lecture.video;
       });
@@ -102,21 +106,34 @@ export class VideoPlayerComponent implements OnInit {
 
     this.dataService.getReactions(lecture, time).then(reactions => {
       this.lineChartData[0].data = reactions.map(r => ({
-        x: new Date(Date.now() + (r.time * 1000)),
+        x: new Date(Date.now() + r.time * 1000),
         y: Math.floor(r.anger * 100)
       }));
       this.lineChartData[1].data = reactions.map(r => ({
-        x: new Date(Date.now() + (r.time * 1000)),
+        x: new Date(Date.now() + r.time * 1000),
         y: Math.floor(r.sorrow * 100)
       }));
       this.lineChartData[2].data = reactions.map(r => ({
-        x: new Date(Date.now() + (r.time * 1000)),
+        x: new Date(Date.now() + r.time * 1000),
         y: Math.floor(r.joy * 100)
       }));
       this.lineChartData[3].data = reactions.map(r => ({
-        x: new Date(Date.now() + (r.time * 1000)),
+        x: new Date(Date.now() + r.time * 1000),
         y: Math.floor(r.surprise * 100)
       }));
+
+      this.lineChartData[4].data = reactions
+        .filter(r => {
+          return (
+            Math.abs(r.tilt) >= 45 ||
+            Math.abs(r.pan) >= 45 ||
+            Math.abs(r.roll) >= 45
+          );
+        })
+        .map(r => ({
+          x: new Date(Date.now() + r.time * 1000),
+          y: 100
+        }));
 
       // this.lineChartData[0].data = reactions.map(r => Math.floor(r.anger * 100));
       // this.lineChartData[1].data = reactions.map(r => Math.floor(r.sorrow * 100));
