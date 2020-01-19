@@ -14,7 +14,13 @@
                 >
             </mat-card>
             <mat-card class="chat">
-    
+                <div *ngFor="let chat of chats">
+                    <b>{{ chat.user }}:</b> {{ chat.text }}
+                </div>
+                <mat-form-field appearance="outline">
+                    <textarea matInput [(ngModel)]="text" placeholder="Hello..."></textarea>
+                </mat-form-field>
+                <button mat-button color="primary" (click)="sendChat(text)">Send</button>
             </mat-card>
         </div>
     </div>  
