@@ -25,7 +25,7 @@
     height: 50%;
     mat-card{
         mat-card-title, mat-card-subtitle {
-            color: #fff
+            color: #fff;
         }
     }
 } 
@@ -36,8 +36,11 @@
 }
 
 .lectureCard {
+    box-shadow: none;
+    border: rgba(0, 0, 0, .125) solid 1px;
+    background: white;
     display: grid;
-    grid-template-columns: 100px auto auto;
+    grid-template-columns: 100px auto;
     .course, .date{
         color: #707070;;
         font-size: large;
@@ -49,5 +52,17 @@
     }
     .date{
         justify-self: end;
+    }
+
+    mat-card-content {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    button {
+        position: absolute;
+        top: (55.5px - 36px) / 2 - 2px;
+        right: 16px;
     }
 }

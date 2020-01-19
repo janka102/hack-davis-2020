@@ -4,11 +4,11 @@
             <span class="title"> My Classes </span>
         </div>
         <div class="content">
-            <mat-card *ngFor="let class of classes" [ngStyle]="{'background': class.color}">
+            <mat-card *ngFor="let class of classes" [ngStyle]="{'background': class.color}" class="mat-elevation-z4">
                 <mat-card-title>{{ class.code }}</mat-card-title>
                 <mat-card-subtitle>{{ class.name }}</mat-card-subtitle>
             </mat-card>
-            <mat-card [ngStyle]="{'background': '#00000064'}">
+            <mat-card [ngStyle]="{'background': '#00000064'}" class="mat-elevation-z4">
                 <mat-card-title>
                     <mat-icon>add</mat-icon>
                 </mat-card-title>
@@ -29,9 +29,7 @@
                 <mat-card-content class="name">
                     <span>Lecture 1.1 - Getting Started in the Class</span>
                 </mat-card-content>
-                <mat-card-content class="date">
-                    <button mat-raised-button color="accent" (click)="goToLecture()">Join Lecture </button>
-                </mat-card-content>          
+                <button mat-raised-button color="accent" (click)="goToLecture()" class="mat-elevation-z4">Join Lecture </button>
             </mat-card>
             <app-lectures *ngFor="let lecture of lectures"
                 [lecture] = "lecture"
