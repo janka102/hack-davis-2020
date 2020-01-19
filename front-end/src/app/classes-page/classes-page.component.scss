@@ -1,6 +1,7 @@
 .page {
     display: grid;
     height: 100%;
+    padding: 0 10vw;
 }
 
 .titleBox{
@@ -13,14 +14,13 @@
 }
 
 .container {
-    width: 90%;
     height: 100%;
     padding: 50px;
 }
 
 .content {
     display: grid;
-    grid-template-columns: 200px 200px 200px 200px ;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
     grid-gap: 20px;
     height: 50%;
     mat-card{
