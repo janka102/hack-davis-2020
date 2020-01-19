@@ -42,7 +42,7 @@ export class ClassesPageComponent implements OnInit {
   }
 
   goToLecture(){
-    this.router.navigate(['class', 'cs101', 'lecture', 'lecture1-1']);
+    this.router.navigate(['class', 'cs101', 'lecture', '5e244178a76b43ad7d382223']);
   }
 
 }
