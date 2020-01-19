@@ -16,11 +16,13 @@ export class ClassesPageComponent implements OnInit {
     },
     {
       code: "English 1", 
+      id: 'eng1',
       name: "Lower Division Writing",
       color: '#9794E5'
     },
     {
       code: "Phys 130", 
+      id: 'phys130',
       name: "Motion Physics",
       color: "#B693C2"
     }
@@ -47,8 +49,8 @@ export class ClassesPageComponent implements OnInit {
     this.router.navigate(['class', 'cs101', 'lecture', '5e244178a76b43ad7d382223']);
   }
 
-  goToClass(classObject){
-    this.router.navigate(['class', 'cs101'],{});
+  goToClass(id){
+    this.router.navigate(['class', id],{});
   }
 
 }

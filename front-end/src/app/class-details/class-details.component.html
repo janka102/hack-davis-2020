@@ -4,7 +4,7 @@
             <span class="title"> Upcoming Lectures </span>
         </div>
         <div class="contentLecture">
-            <mat-card class="lectureCard">
+            <mat-card class="lectureCard" *ngIf="classId == 'cs101'">
                 <mat-card-content class="course">
                     <span>CS 101</span>
                 </mat-card-content>

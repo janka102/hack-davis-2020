@@ -4,7 +4,7 @@
             <span class="title"> My Classes </span>
         </div>
         <div class="content">
-            <mat-card *ngFor="let class of classes" [ngStyle]="{'background': class.color}" class="mat-elevation-z4" (click)="goToClass(class)">
+            <mat-card *ngFor="let class of classes" [ngStyle]="{'background': class.color}" class="mat-elevation-z4" (click)="goToClass(class.id)">
                 <mat-card-title>{{ class.code }}</mat-card-title>
                 <mat-card-subtitle>{{ class.name }}</mat-card-subtitle>
             </mat-card>
