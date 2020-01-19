@@ -76,6 +76,7 @@ export class VideoPlayerComponent implements OnInit {
       .getLecture(this.route.snapshot.params.lectureId)
       .then(lecture => {
         this.name = lecture.name;
+        this.navbarService.setClassName('CS 101 - Intro to Computer Science', 'cs101');
         this.navbarService.setLectureName(this.name);
         this.lectureVideo = lecture.video;
       });
