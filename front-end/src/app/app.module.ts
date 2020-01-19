@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { WebcamCapturerComponent } from './components/webcam-capturer/webcam-capturer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WebcamCapturerComponent
   ],
   imports: [
     BrowserModule,
