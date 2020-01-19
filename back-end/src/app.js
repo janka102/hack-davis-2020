@@ -7,7 +7,7 @@ const api = require("./api");
 const app = express();
 const { PORT } = process.env;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "500kb" }));
 app.use(morgan("dev"));
 
 app.use(
