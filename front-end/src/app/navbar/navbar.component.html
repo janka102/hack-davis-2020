@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z2">
 
     <mat-toolbar-row class="top-toolbar">
       <div>
@@ -9,9 +9,9 @@
       </div>
     </mat-toolbar-row>
 
-    <mat-toolbar-row>
+    <mat-toolbar-row *ngIf="showClass">
+        <div class="breadcrumb"></div>
         <span> {{ className ? className + ' - ' + classDescription : ' ' }} </span>
     </mat-toolbar-row>
     
   </mat-toolbar>
-  

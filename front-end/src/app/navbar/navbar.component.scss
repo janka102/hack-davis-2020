@@ -1,5 +1,6 @@
 mat-toolbar {
     flex-direction: row;
+    overflow: hidden;
     mat-toolbar-row {
         width: auto !important;
     }
@@ -17,4 +18,12 @@ mat-toolbar {
         margin-left: 2vw;
         text-decoration: none;
       }
+}
+
+.breadcrumb {
+    height: 112%;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    transform: rotate(22.5deg);
+    margin-right: 32px;
 }
