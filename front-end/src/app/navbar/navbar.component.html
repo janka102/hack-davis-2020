@@ -11,7 +11,7 @@
 
     <mat-toolbar-row *ngIf="data.showClass">
         <div class="breadcrumb"></div>
-        <span [routerLink]="['class', data.currentClassId]"> {{ data.currentClass }} </span>
+        <a [routerLink]="['class', data.currentClassId]" class="bread"> {{ data.currentClass }} </a>
     </mat-toolbar-row>
 
     <mat-toolbar-row *ngIf="data.showLecture">
