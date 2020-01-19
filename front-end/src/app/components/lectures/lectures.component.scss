@@ -1,0 +1,16 @@
+.lectureCard {
+    display: grid;
+    grid-template-columns: 100px auto auto;
+    .course, .date{
+        color: grey;
+        font-size: large;
+        font-weight: bold;
+    }
+    .name{
+        color: grey;
+        font-size: large;
+    }
+    .date{
+        justify-self: end;
+    }
+}

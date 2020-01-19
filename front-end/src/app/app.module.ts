@@ -16,6 +16,8 @@ import { WebcamCapturerComponent } from './components/webcam-capturer/webcam-cap
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { ClassesPageComponent } from './classes-page/classes-page.component';
+import { LecturesComponent } from './components/lectures/lectures.component';
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -24,7 +26,9 @@ import { ChartsModule } from 'ng2-charts';
     AppComponent,
     WebcamCapturerComponent,
     NavbarComponent,
-    VideoPlayerComponent
+    VideoPlayerComponent,
+    ClassesPageComponent,
+    LecturesComponent
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,9 @@ import { DataService, Chat, Timestamp } from '../services/data.service';
   styleUrls: ['./video-player.component.scss']
 })
 export class VideoPlayerComponent implements OnInit {
-  @Input() lectureNumber;
-  @Input() lectureTitle;
+  @Input() course = "CS 101";
+  @Input() courseInfo = "Intro to Computer Science";
+  @Input() name = "Lecture 1.1 - Getting Started in the Class";
   text: string;
 
   chats: Chat[];
