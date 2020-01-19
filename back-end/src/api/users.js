@@ -55,6 +55,10 @@ router.post("/faceDetect", (req, res) => {
     picture = picture.slice(picture.indexOf("base64,") + "base64,".length);
   }
 
+  time = Math.floor(time);
+
+  console.log("Saving", time);
+
   const content = Buffer.from(picture, "base64");
 
   visionClient
@@ -106,6 +110,25 @@ router.post("/faceDetect", (req, res) => {
       //   JSON.stringify(face, null, 2),
       //   err => {}
       // );
+
+      // return Reaction.findOneAndUpdate(
+      //   {
+      //     user: mongoose.Types.ObjectId(user),
+      //     lecture: mongoose.Types.ObjectId(lecture)
+      //   },
+      //   {
+      //     user: mongoose.Types.ObjectId(user),
+      //     lecture: mongoose.Types.ObjectId(lecture),
+      //     time,
+      //     source: "video",
+      //     result: face
+      //   },
+      //   {
+      //     upset: true
+      //   }
+      // ).then(reaction => {
+      //   res.json(reaction);
+      // });
 
       return Reaction.create({
         user: mongoose.Types.ObjectId(user),

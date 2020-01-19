@@ -15,10 +15,10 @@
         </mat-form-field>
       </div>
     </div>
-    <div class="content" *ngIf="selectedUser.role === 'professor'">
-      <div class="cards professor">
-        <mat-card class="video-professor">
-          <video class="lecture-video" controls [src]="lectureVideo"></video>
+    <div class="content">
+      <div class="cards" [ngClass]="{professor: selectedUser.role === 'professor'}">
+        <mat-card [ngClass]="{'video-professor': selectedUser.role === 'professor', 'video-student': selectedUser.role === 'student'}">
+          <video class="lecture-video" controls [src]="lectureVideoSrc" #lecvid></video>
           <canvas
             baseChart
             width="200"
@@ -28,23 +28,61 @@
             [legend]="true"
             chartType="line"
             class="graph"
+            *ngIf="selectedUser.role === 'professor'"
           >
           </canvas>
+          <app-webcam-capturer
+            [width]="200"
+            (image)="sendPicture($event)"
+            *ngIf="selectedUser.role === 'student'"
+          >
+          </app-webcam-capturer>
         </mat-card>
+        <mat-card class="chat" *ngIf="selectedUser.role === 'student'">
+            <div class="chat-content">
+              <div
+                class="chat-history"
+                #scrollMe
+                [scrollTop]="scrollMe.scrollHeight"
+              >
+                <div *ngFor="let chat of chats">
+                  <span class="chat-user">{{ chat.user }}:</span>&nbsp;<span
+                    class="chat-text"
+                  >
+                    {{ chat.text }}
+                  </span>
+                </div>
+              </div>
+              <div class="chat-divider"></div>
+              <div class="chat-box">
+                <mat-form-field appearance="outline">
+                  <textarea
+                    matInput
+                    [(ngModel)]="text"
+                    placeholder="Hello..."
+                    (keydown.enter)="sendChat(text); (false)"
+                  ></textarea>
+                </mat-form-field>
+                <button mat-flat-button color="accent" (click)="sendChat(text)">
+                  <mat-icon>send</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card>
       </div>
     </div>
-    <div class="content" *ngIf="selectedUser.role === 'student'">
+    <!-- <div class="content" *ngIf="selectedUser.role === 'student'">
       <div class="cards">
         <mat-card class="video-student">
-          <video class="lecture-video" controls [src]="lectureVideo"></video>
-          <app-webcam-capturer [width]="200" (image)="sendPicture($event)">
+          <video class="lecture-video" controls [src]="lectureVideoSrc" #lecvidStud></video>
+          <app-webcam-capturer
+            [width]="200"
+            (image)="sendPicture($event)"
+            *ngIf="selectedUser.role === 'student'"
+          >
           </app-webcam-capturer>
-          <!-- <p>
-            Tilt: {{ facePosition.tilt }}&deg;, Pan:
-            {{ facePosition.pan }}&deg;, Roll: {{ facePosition.roll }}&deg;
-          </p> -->
         </mat-card>
-        <mat-card class="chat">
+        <mat-card class="chat" *ngIf="selectedUser.role === 'student'">
           <div class="chat-content">
             <div
               class="chat-history"
@@ -76,6 +114,6 @@
           </div>
         </mat-card>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

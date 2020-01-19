@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { ChartDataSets, ChartOptions, ChartPoint } from "chart.js";
 import { Color, Label } from "ng2-charts";
 import { DataService, Chat, Timestamp } from "../services/data.service";
 import { NavbarService } from '../navbar.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import { interval, Subscription } from "rxjs";
 
 @Component({
   selector: "app-video-player",
@@ -14,9 +15,15 @@ export class VideoPlayerComponent implements OnInit {
   @Input() course = "CS 101";
   @Input() courseInfo = "Intro to Computer Science";
   @Input() name;
-  @Input() lectureVideo;
-  text: string;
+  @Input() lectureVideoSrc;
+  @Input() pollInterval = 1000;
+  private pollSub: Subscription;
 
+  @ViewChild("lecvid", { static: true })
+  private lecvidElement: ElementRef;
+  private lecvid: HTMLVideoElement;
+
+  text: string;
   chats: Chat[];
   users: any[];
   selectedUser: any = null;
@@ -29,14 +36,14 @@ export class VideoPlayerComponent implements OnInit {
   ];
   public lineChartOptions: ChartOptions = {
     scales: {
-      xAxes: [
-        {
-          type: "time",
-          time: {
-            unit: "second"
-          }
-        }
-      ],
+      // xAxes: [
+      //   {
+      //     type: "time",
+      //     time: {
+      //       unit: "second"
+      //     }
+      //   }
+      // ],
       yAxes: [
         {
           ticks: {
@@ -49,12 +56,6 @@ export class VideoPlayerComponent implements OnInit {
     animation: {
       duration: 0
     }
-  };
-
-  public facePosition = {
-    tilt: 0,
-    pan: 0,
-    roll: 0
   };
 
   constructor(
@@ -78,71 +79,74 @@ export class VideoPlayerComponent implements OnInit {
         this.name = lecture.name;
         this.navbarService.setClassName('CS 101 - Intro to Computer Science', 'cs101');
         this.navbarService.setLectureName(this.name);
-        this.lectureVideo = lecture.video;
+        this.lectureVideoSrc = lecture.video;
       });
 
     this.dataService.getUsers().then(users => {
       this.users = users;
       this.selectedUser = users[0];
     });
+
+    this.lecvid = this.lecvidElement.nativeElement;
+    const intervalPoll = interval(this.pollInterval);
+    this.pollSub = intervalPoll.subscribe(() => this.pollReactions());
   }
 
-  async sendPicture(image: string) {
-    const now = new Date();
-    let time = 0;
-    let reaction = await this.dataService.sendStudentPicture({
-      user: "5e243115d38bde6a3aa167a7",
-      lecture: "5e244178a76b43ad7d382225",
-      image,
-      time
+  pollReactions() {
+    if (this.selectedUser.role !== "professor") {
+      return;
+    }
+
+    const lecture = this.route.snapshot.params.lectureId;
+    const time = Math.floor(this.lecvid.currentTime);
+
+    this.dataService.getReactions(lecture, time).then(reactions => {
+      this.lineChartData[0].data = reactions.map(r => ({
+        x: r.time,
+        y: Math.floor(r.anger * 100)
+      }));
+      this.lineChartData[1].data = reactions.map(r => ({
+        x: r.time,
+        y: Math.floor(r.sorrow * 100)
+      }));
+      this.lineChartData[2].data = reactions.map(r => ({
+        x: r.time,
+        y: Math.floor(r.joy * 100)
+      }));
+      this.lineChartData[3].data = reactions.map(r => ({
+        x: r.time,
+        y: Math.floor(r.surprise * 100)
+      }));
     });
-    console.log(reaction);
-    if (!reaction.result) {
-      // No face detected
-      reaction.result = {
-        anger: 0,
-        sorrow: 0,
-        joy: 0,
-        surprise: 0
-      };
+  }
+
+  // userChanged($event) {
+  //   if (this.selectedUser.role === "professor") {
+  //     this.lecvid = this.lecvidElement.nativeElement;
+  //   }
+  // }
+
+  async sendPicture(image: string) {
+    let time = Math.floor(this.lecvid.currentTime);
+
+    if (time > 0) {
+      await this.dataService.sendStudentPicture({
+        user: this.selectedUser._id,
+        lecture: this.route.snapshot.params.lectureId,
+        image,
+        time
+      });
     }
-
-    const result = reaction.result;
-
-    // Not sure why typescript complains about the type here, it works just fine!
-    this.lineChartData[0].data.push({
-      t: now,
-      y: Math.floor(result.anger * 100)
-    } as any);
-    this.lineChartData[1].data.push({
-      t: now,
-      y: Math.floor(result.sorrow * 100)
-    } as any);
-    this.lineChartData[2].data.push({
-      t: now,
-      y: Math.floor(result.joy * 100)
-    } as any);
-    this.lineChartData[3].data.push({
-      t: now,
-      y: Math.floor(result.surprise * 100)
-    } as any);
-
-    for (const chartData of this.lineChartData) {
-      chartData.data.sort((a, b) => a.t - b.t);
-
-      // Only keep the last 30
-      if (chartData.data.length > 30) {
-        chartData.data = chartData.data.slice(-30);
-      }
-    }
-
-    this.facePosition.tilt = Math.floor(result.tilt);
-    this.facePosition.pan = Math.floor(result.pan);
-    this.facePosition.roll = Math.floor(result.roll);
   }
 
   async sendChat(text: string) {
     this.text = "";
     await this.dataService.sendChat("test", this.selectedUser.name, text);
+  }
+
+  ngOnDestroy() {
+    if (this.pollSub) {
+      this.pollSub.unsubscribe();
+    }
   }
 }

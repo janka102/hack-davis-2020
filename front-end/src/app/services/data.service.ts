@@ -64,26 +64,18 @@ export class DataService {
     return result;
   }
 
-  async getReactions(user, lecture) {
-    const query = [];
-
-    if (user) {
-      query.push(`user=${user}`);
-    }
-
-    if (lecture) {
-      query.push(`lecture=${lecture}`);
-    }
-
+  async getReactions(lecture, time) {
     const result = (await this.http
-      .get(`${environment.serverUrl}/reaction/?${query.join("&")}`)
+      .get(
+        `${environment.serverUrl}/reactions/?lecture=${lecture}&time=${time}`
+      )
       .toPromise()) as { [x: string]: any }[];
     return result;
   }
 
   async getReaction(id: string) {
     const result = (await this.http
-      .get(`${environment.serverUrl}/reaction/${id}`)
+      .get(`${environment.serverUrl}/reactions/${id}`)
       .toPromise()) as { [x: string]: any };
     return result;
   }
