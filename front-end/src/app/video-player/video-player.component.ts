@@ -76,22 +76,24 @@ export class VideoPlayerComponent implements OnInit {
       };
     }
 
-    this.lineChartData[0].data.push({ t: now, y: (result.anger * 100) | 0 } as any);
-    this.lineChartData[1].data.push({ t: now, y: (result.sorrow * 100) | 0 } as any);
-    this.lineChartData[2].data.push({ t: now, y: (result.joy * 100) | 0 } as any);
-    this.lineChartData[3].data.push({ t: now, y: (result.surprise * 100) | 0 } as any);
+    // Not sure why typescript complains about the type here, it works just fine!
+    this.lineChartData[0].data.push({ t: now, y: Math.floor(result.anger * 100) } as any);
+    this.lineChartData[1].data.push({ t: now, y: Math.floor(result.sorrow * 100) } as any);
+    this.lineChartData[2].data.push({ t: now, y: Math.floor(result.joy * 100) } as any);
+    this.lineChartData[3].data.push({ t: now, y: Math.floor(result.surprise * 100) } as any);
 
-    for (let chartData of this.lineChartData) {
+    for (const chartData of this.lineChartData) {
       chartData.data.sort((a, b) => a.t - b.t);
 
+      // Only keep the last 30
       if (chartData.data.length > 30) {
         chartData.data = chartData.data.slice(-30);
       }
     }
 
-    this.facePosition.tilt = result.tilt | 0;
-    this.facePosition.pan = result.pan | 0;
-    this.facePosition.roll = result.roll | 0;
+    this.facePosition.tilt = Math.floor(result.tilt);
+    this.facePosition.pan = Math.floor(result.pan);
+    this.facePosition.roll = Math.floor(result.roll);
   }
 
   async sendChat(text: string) {
